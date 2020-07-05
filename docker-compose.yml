@@ -1,0 +1,40 @@
+version: '3'
+services:
+  app:
+    container_name: app_golang
+    build: .
+    ports: 
+      - ${API_PORT}:${API_PORT}
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    depends_on:
+      - app-mysql          
+    networks:
+      - app_golang
+
+
+  app-mysql:
+    image: mysql:5.7
+    container_name: app_db_mysql
+    ports: 
+        - 3306:3306
+    environment: 
+        - MYSQL_ROOT_HOST=docker.for.mac.localhost 
+        - MYSQL_USER=ab
+        - MYSQL_PASSWORD=test
+        - MYSQL_DATABASE=app_db
+        - MYSQL_ROOT_PASSWORD=abganteng
+    volumes:
+        - database_mysql:/var/lib/mysql
+    networks:
+        - app_golang
+
+volumes:
+  api:
+  database_mysql:                  
+
+# Networks to be created to facilitate communication between containers
+networks:
+  app_golang:
+    driver: bridge
