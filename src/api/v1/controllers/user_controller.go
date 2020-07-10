@@ -74,9 +74,9 @@ func (handler *UserController) Update(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, nil)
 	}
 
-	err := handler.userService.Update(userId, jsonRequest)
+	error := handler.userService.Update(userId, jsonRequest)
 
-	if err != nil {
+	if error != nil {
 		context.JSON(http.StatusBadRequest, nil)
 	}
 

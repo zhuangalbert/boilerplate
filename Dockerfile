@@ -20,6 +20,6 @@ WORKDIR /root/
 COPY --from=builder /app/main .
 COPY --from=builder /app/.env .       
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["sh","-c","./main migrate"]
+CMD ["./main"]

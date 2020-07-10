@@ -41,12 +41,11 @@ func startProd() {
 }
 
 func startApp() {
-	serverHost := os.Getenv("SERVER_ADDRESS")
-	serverPort := os.Getenv("SERVER_PORT")
+	serverPort := os.Getenv("API_PORT")
 
 	router := gin.Default()
 	controllers.UserControllerHandler(router)
-	serverString := fmt.Sprintf("%s:%s", serverHost, serverPort)
+	serverString := fmt.Sprintf(":%s", serverPort)
 	fmt.Println(serverString)
 	router.Run(serverString)
 }
